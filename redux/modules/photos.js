@@ -34,6 +34,7 @@ function getFeed() {
         .then(response => {
             console.log("getFeed response");
             console.log(response);
+            
           if (response.status === 401) {
             dispatch(userActions.logOut());
           } else {

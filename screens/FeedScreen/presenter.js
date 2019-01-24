@@ -1,8 +1,45 @@
 import React from "react";
-import { View, Text } from "react-native";
+import PropTypes from "prop-types";
+import {
+  View,
+  Text,
+  ScrollView,
+  RefreshControl,
+  StyleSheet
+} from "react-native";
+import Photo from "../../components/Photo";
 
 const FeedScreen = props => (
-  <Text onPress={() => props.navigation.navigate("Likes")}>Feed</Text>
+  <ScrollView
+    refreshControl={
+      <RefreshControl
+        refreshing={props.isFetching}
+        onRefresh={props.refresh}
+        tintColor={"black"}
+      />
+    }
+    contentContainerStyle={styles.container}
+  >
+    <View style={styles.container}>
+      
+      {props.feed && props.feed.map(photo => <Photo {...photo} key={photo.id} />)}
+    </View>
+  </ScrollView>
 );
 
-export default FeedScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white"
+  }
+});
+
+FeedScreen.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  refresh: PropTypes.func.isRequired,
+  feed : PropTypes.array
+  //feed: PropTypes.array.isRequired  // 추후 데이터가 있으면 붙여야됨 
+};
+
+export default FeedScreen; 
