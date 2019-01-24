@@ -6,7 +6,10 @@ import sharedRoutes, { sharedOptions } from "./sharedRoutes";
 const ProfileRoute = createStackNavigator(
   {
     Profile: {
-      screen: ProfileScreen
+      screen: ProfileScreen,
+      navigationOptions: ({screenProps}) => ({
+        headerTitle: screenProps.username,
+      })
     },
     ...sharedRoutes // 이걸 언팩이라고 하는데 sharedRoutes.js에 sharedRoutes 껄 다 가져오는 것같은
   },
