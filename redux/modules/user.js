@@ -7,6 +7,7 @@ import { Facebook } from "expo";
 const LOG_IN = "LOG_IN";    // 토큰 저장
 const LOG_OUT = "LOG_OUT";
 const SET_USER = "SET_USER";
+const SET_NOTIFICATIONS = "SET_NOTIFICATIONS";
 
 
 // Action Creators
@@ -29,6 +30,13 @@ function logOut() {
   return { type: LOG_OUT };
 }
 
+
+function setNotifications(notifications) {
+  return {
+    type: SET_NOTIFICATIONS,
+    notifications
+  };
+}
 
 // API Actions
 function login(username, password) {
@@ -104,6 +112,47 @@ function facebookLogin() {
   };
 }
 
+
+function getNotifications() {
+  return (dispatch, getState) => {
+    const { user: { token } } = getState();
+    fetch(`${API_URL}/notifications/`, {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+      .then(response => {
+        if (response.status === 401) {
+          dispatch(logOut());
+        } else {
+          return response.json();
+        }
+      })
+      .then(json => dispatch(setNotifications(json)));
+  };
+}
+
+// 내 플필 저장 해둔다 리덕스에 
+function getOwnProfile() {
+  return (dispatch, getState) => {
+    const { user: { token, profile: { username } } } = getState();
+    fetch(`${API_URL}/users/${username}/`, {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+      .then(response => {
+        if (response.status === 401) {
+          dispatch(logOut());
+        } else {
+          return response.json();
+        }
+      })
+      .then(json => dispatch(setUser(json)));
+  };
+}
+
+
 // Initial State
 
 const initialState = {
@@ -111,7 +160,6 @@ const initialState = {
   };
   
   // Reducer
-  
   function reducer(state = initialState, action) {
     //applyLogOut(state, action);
     switch (action.type) {
@@ -121,6 +169,8 @@ const initialState = {
         return applyLogOut(state, action); // remove all
       case SET_USER:
         return applySetUser(state, action);
+      case SET_NOTIFICATIONS:
+        return applySetNotifications(state, action);        
       default:
         return state;
     }
@@ -153,12 +203,23 @@ const initialState = {
   }
 
 
-  // Exports
-  const actionCreators = {
-    login,
-    facebookLogin,
-    logOut
+  function applySetNotifications(state, action) {
+    const { notifications } = action;
+    return {
+      ...state,
+      notifications
+    };
   }
+
+  // Exports
+const actionCreators = {
+  login,
+  facebookLogin,
+  logOut,
+  getNotifications,
+  getOwnProfile
+};
+
   export { actionCreators };
   
   // Default Reducer Export

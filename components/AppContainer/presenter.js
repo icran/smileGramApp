@@ -6,8 +6,15 @@ import RootNavigation from "../../navigation/RootNavigation";
 
 class AppContainer extends Component {
   static propTypes = {
-    isLoggedIn: PropTypes.bool.isRequired
+    isLoggedIn: PropTypes.bool.isRequired,
+    initApp: PropTypes.func.isRequired
   };
+  componentDidMount() { // 이곳이 좀 이해가 안감 
+    const { isLoggedIn, initApp } = this.props;
+    if (isLoggedIn) {
+      initApp();
+    }
+  }
   render() {
     const { isLoggedIn, profile } = this.props;
     return (
