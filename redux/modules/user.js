@@ -17,9 +17,6 @@ function setLogIn(token) {
   };
 }
 
-function setLogOut() {
-  return { type: LOG_OUT };
-}
 
 function setUser(user) {
   return {
@@ -27,6 +24,11 @@ function setUser(user) {
     user
   };
 }
+
+function logOut() {
+  return { type: LOG_OUT };
+}
+
 
 // API Actions
 function login(username, password) {
@@ -154,7 +156,8 @@ const initialState = {
   // Exports
   const actionCreators = {
     login,
-    facebookLogin
+    facebookLogin,
+    logOut
   }
   export { actionCreators };
   
