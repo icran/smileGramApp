@@ -32,12 +32,16 @@ function getFeed() {
         }
       })
         .then(response => {
-            console.log("getFeed response");
+            console.log("photos.js getFeed response");
             console.log(response);
             
+            
           if (response.status === 401) {
+            //console.log("photos.js getFeed 401");
             dispatch(userActions.logOut());
           } else {
+            //console.log("photos.js getFeed else");
+            //console.log(response.json());
             return response.json();
           }
         })
@@ -54,7 +58,7 @@ function getFeed() {
         }
       })
         .then(response => {
-            console.log("getSearch response");
+            console.log("photos.js getSearch response");
             console.log(response);
           if (response.status === 401) {
             dispatch(userActions.logOut());

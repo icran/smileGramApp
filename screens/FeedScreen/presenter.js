@@ -19,14 +19,18 @@ const FeedScreen = props => (
       />
     }
     contentContainerStyle={styles.container}
-  >
+    >
+    
     <View style={styles.container}>
-      
-      {props.feed && props.feed.map(photo => <Photo {...photo} key={photo.id} />)}
+      {props.feed &&
+        props.feed.map(photo => <Photo {...photo} key={photo.id} />)}
+        
     </View>
   </ScrollView>
 );
-
+// props.feed.map( 4-26 7:00 설명
+// 피드는 map state to props 에서 오고 이는 리듀서에서 오고 이는 get feed 에서 온다. 
+// 
 
 const styles = StyleSheet.create({
   container: {

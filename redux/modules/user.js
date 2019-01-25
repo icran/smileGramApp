@@ -89,12 +89,13 @@ function facebookLogin() {
           access_token: token
         })
       })
-      /*
+     
       .then(response => {
           console.log("success wow response");
           console.log(response);
+          //https://63892179.ngrok.io
         });
-        */
+         /*
         .then(response => response.json())
         .then(json => {
           console.log("success wow");
@@ -108,6 +109,7 @@ function facebookLogin() {
             return false;
           }
         });
+        */
     }
   };
 }

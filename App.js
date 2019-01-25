@@ -10,12 +10,12 @@ const { persistor, store } = configureStore();        // 앱 내 저장
 import AppContainer from "./components/AppContainer"
 
 //store.dispatch({ type:"LOG_OUT"});
-
 class App extends React.Component {
   state = {
     isLoadingComplete : false
   };
   render() {
+    
     const { isLoadingComplete } = this.state;
     if (!isLoadingComplete) {
       return <AppLoading startAsync={this._loadAssetsAsync}
