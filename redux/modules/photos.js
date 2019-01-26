@@ -32,7 +32,7 @@ function getFeed() {
         }
       })
         .then(response => {
-            console.log("photos.js getFeed response");
+            console.log("photos.js getFeed response : "+ response.status);
             console.log(response);
             
             

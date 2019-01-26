@@ -12,9 +12,9 @@ import Photo from "../../components/Photo";
 const FeedScreen = props => (
   <ScrollView
     refreshControl={
-      <RefreshControl
-        refreshing={props.isFetching}
-        onRefresh={props.refresh}
+      <RefreshControl 
+        refreshing={props.isFetching} 
+        onRefresh={props.refresh} 
         tintColor={"black"}
       />
     }
@@ -42,8 +42,7 @@ const styles = StyleSheet.create({
 FeedScreen.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
-  feed : PropTypes.array
-  //feed: PropTypes.array.isRequired  // 추후 데이터가 있으면 붙여야됨 
+  feed: PropTypes.array.isRequired
 };
 
 export default FeedScreen; 

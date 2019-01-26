@@ -23,7 +23,7 @@ const Photo = props => (
       </View>
       <View>
         <Text>{props.creator.username}</Text>
-        {props.location && <Text>{props.location}</Text>}
+        {props.locations && <Text>{props.locations}</Text>} 
       </View>
     </TouchableOpacity>
     <FadeIn>
@@ -58,7 +58,7 @@ Photo.propTypes = {
     profile_image: PropTypes.string,
     username: PropTypes.string.isRequired
   }).isRequired,
-  location: PropTypes.string.isRequired,
+  locations: PropTypes.string.isRequired,
   file: PropTypes.string.isRequired,
   like_count: PropTypes.number.isRequired,
   caption: PropTypes.string.isRequired,
