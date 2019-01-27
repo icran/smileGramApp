@@ -15,7 +15,7 @@ class Container extends Component{
         isFetching:false
     }
     componentWillReceiveProps = (nextProps) => {
-        if(nextProps.feed){
+        if (nextProps.feed){
             this.setState({
                 isFetching:false
             });
@@ -29,9 +29,11 @@ class Container extends Component{
     }
     _refresh = () => {
         const { getFeed } = this.props;
+        /*
         this.setState({
             isFetching: true
         });
+        */
         getFeed();
     };
 }

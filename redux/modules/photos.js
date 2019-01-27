@@ -32,9 +32,8 @@ function getFeed() {
         }
       })
         .then(response => {
-            console.log("photos.js getFeed response : "+ response.status);
-            console.log(response);
-            
+            //console.log("photos.js getFeed response : "+ response.status);
+            //console.log(response);
             
           if (response.status === 401) {
             //console.log("photos.js getFeed 401");
@@ -58,8 +57,8 @@ function getFeed() {
         }
       })
         .then(response => {
-            console.log("photos.js getSearch response");
-            console.log(response);
+            //console.log("photos.js getSearch response");
+            //console.log(response);
           if (response.status === 401) {
             dispatch(userActions.logOut());
           } else {

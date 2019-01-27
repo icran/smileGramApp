@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image, Dimensions, StyleSheet } from "react-native";
 import FadeIn from "react-native-fade-in-image";
-/*
-const Photo = props => <Text>-1--1-1-11-1-2Phototototo!</Text>;
-*/
+
+const {width,height }= Dimensions.get("window");
+
 const Photo = props => (
-  <View>
+  <View style={styles.photo}>
     <TouchableOpacity>
-      <View>
+      <View style={styles.header}>
         <FadeIn>
           <Image
             source={
@@ -18,16 +18,18 @@ const Photo = props => (
                   }
                 : require("../../assets/images/noPhoto.jpg")
             }
+            style={styles.avator}
           />
         </FadeIn>
       </View>
       <View>
-        <Text>{props.creator.username}</Text>
-        {props.locations && <Text>{props.locations}</Text>} 
+        <Text style={styles.author}>{props.creator.username}</Text>
+        {props.locations && <Text style={styles.author}>>{props.locations}</Text>} 
       </View>
     </TouchableOpacity>
     <FadeIn>
-      <Image source={{ uri: props.file }} />
+             
+      <Image source={{ uri: props.file }}  />
     </FadeIn>
     <View>
       <View>
@@ -51,6 +53,68 @@ const Photo = props => (
     </View>
   </View>
 );
+
+
+
+
+const styles = StyleSheet.create({
+  photo: {
+      width,
+      marginBottom: 10
+  },
+  header: {
+      paddingHorizontal: 15,
+      flexDirection: "row",
+      paddingVertical: 15,
+      alignItems: "center",
+      borderBottomColor: "#bbb",
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      flex: 1
+  },
+  avatar: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      marginRight: 10
+  },
+  author: {
+      fontWeight: "600",
+      marginBottom: 3,
+      fontSize: 15
+  },
+  locations: {
+      fontSize: 13
+  },
+  photoMeta: {
+      paddingHorizontal: 15
+  },
+  comment: {
+      marginTop: 5
+  },
+  commentAuthor: {
+      marginRight: 5,
+      fontWeight: "600",
+      fontSize: 14
+  },
+  message: {
+      fontWeight: "400",
+      fontSize: 15
+  },
+  commentsLink: {
+      marginTop: 5
+  },
+  linkText: {
+      fontSize: 15,
+      color: "#999"
+  },
+  dateText: {
+      fontSize: 12,
+      color: "#999",
+      marginTop: 10
+  }
+});
+
+// 받을 정보들 세팅 PropTypes.shape 는 무엇일까
 
 Photo.propTypes = {
   id: PropTypes.number.isRequired,
